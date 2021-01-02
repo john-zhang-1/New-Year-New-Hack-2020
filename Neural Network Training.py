@@ -83,3 +83,6 @@ test_results = {}
 test_results['deep_neural_network_model'] = deep_neural_network_model.evaluate(test_features, test_labels, verbose=0)
 
 print(pd.DataFrame(test_results, index = ['Mean absolute error [Quality]']).T)
+
+
+deep_neural_network_model.save('deep_neural_network_model')
