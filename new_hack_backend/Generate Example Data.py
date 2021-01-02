@@ -8,7 +8,7 @@ noise_max = [60, 240, 240, 0, 0, 15, 2, 4, 30, 15]
 weighting = [0.5, 1.5, 1.5, 3, 0, 0.5, 1, 1, 1, 1]
 
 def create_doc():
-    with open('random_gen_data.csv', mode = 'w') as myfile:
+    with open('Example Model/random_gen_data.csv', mode = 'w') as myfile:
         writer = csv.writer(myfile)
         writer.writerow(variables)
 
@@ -42,5 +42,4 @@ def create_doc():
 
             writer.writerow(new_point)
 
-if __name__ == '__main__':
-    create_doc()
+create_doc()
