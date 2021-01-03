@@ -6,8 +6,8 @@ from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.layers.experimental import preprocessing
 
-# column_names = ['Quality', 'Meal', 'Bedtime', 'Waketime', 'Length',	'Electronics', 'Up', 'Temperature',	'Noise', 'Nap']
-raw_dataset = pd.read_csv('Example Model/random_gen_data.csv', sep = ',', header = 0,
+raw_dataset = pd.read_csv('Example Model/random_gen_data.csv', sep = ',',
+                          header = 0,
                           na_values = '?', comment = '\t',
                           skipinitialspace = True)
 
@@ -52,9 +52,9 @@ history = deep_neural_network_model.fit(
     validation_split=0.2,
     verbose=0, epochs=100)
 
-test_results = {}
-test_results['deep_neural_network_model'] = deep_neural_network_model.evaluate(test_features, test_labels, verbose=0)
-
-print(pd.DataFrame(test_results, index = ['Mean absolute error [Quality]']).T)
+# test_results = {}
+# test_results['deep_neural_network_model'] = deep_neural_network_model.evaluate(test_features, test_labels, verbose=0)
+#
+# print(pd.DataFrame(test_results, index = ['Mean absolute error [Quality]']).T)
 
 deep_neural_network_model.save('Example Model/deep_neural_network_model')
