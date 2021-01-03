@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import csv
 
 import tensorflow as tf
 from tensorflow import keras
@@ -8,16 +9,19 @@ from tensorflow.keras.layers.experimental import preprocessing
 from tensorflow.keras.models import load_model
 
 class user():
-    def __init__(self, datafile, model, current_features):
-        self.datafile = datafile
-        self.deep_neural_network_model = model
-        self.current_features = current_features
+    def __init__(self, name):
+        with open(f'user_data/{name}.csv', mode='w') as myfile:
+            writer = csv.writer(myfile)
+            writer.writerow(['Meal', 'Bedtime', 'Waketime', 'Quality', 'Electronics', 'Up', 'Temperature', 'Noise', 'Nap'])
+        
+        self.datafile = name + '.csv'
+        self.deep_neural_network_model = None
         self.variables = ['Mealtime', 'Bedtime', 'Waketime', 'Quality', 'Electronics', 'Up', 'Temperature', 'Noise', 'Nap']
         self.variables_improvement = [-60, -240, 240, None, -60, -5, -5, -25, -25]
         self.user_messages = ['Try to have your meal % minutes earlier', 'Try to go to sleep % minutes earlier',
-                         'Try to wake up % minutes later', None, 'Try to stop using electronics % minutes earlier',
-                         'Try to lower the temperature by % degrees Celsius', 'Try to find a way to lower the noise level by % decibels',
-                         'Try to take % minutes less of naps']
+                              'Try to wake up % minutes later', None, 'Try to stop using electronics % minutes earlier',
+                              'Try to lower the temperature by % degrees Celsius', 'Try to find a way to lower the noise level by % decibels',
+                              'Try to take % minutes less of naps']
 
     def make_prediction(self, features):
         """Given current features, make a prediction"""
@@ -105,4 +109,5 @@ class user():
             validation_split=0.2,
             verbose=0, epochs=100)
 
-        deep_neural_network_model.save('deep_neural_network_model')
+        deep_neural_network_model.save('user_data/deep_neural_network_model')
+        self.deep_neural_network_model = 'user_data/deep_neural_network_model'
